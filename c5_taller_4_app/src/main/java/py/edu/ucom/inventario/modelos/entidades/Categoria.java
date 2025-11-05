@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "categorias")
-public class Categoria implements Serializable {
+public class Categoria extends Auditable implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,10 +18,28 @@ public class Categoria implements Serializable {
     @Column(name = "descripcion", length = 255)
     private String descripcion;
 
-    public Long getIdCategoria() { return idCategoria; }
-    public void setIdCategoria(Long idCategoria) { this.idCategoria = idCategoria; }
-    public String getNombre() { return nombre; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
-    public String getDescripcion() { return descripcion; }
-    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
+    // --- Getters y Setters ---
+    public Long getIdCategoria() {
+        return idCategoria;
+    }
+
+    public void setIdCategoria(Long idCategoria) {
+        this.idCategoria = idCategoria;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 }

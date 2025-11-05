@@ -3,6 +3,7 @@ package py.edu.ucom.inventario.modelos.entidades;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
@@ -11,7 +12,7 @@ import java.math.BigDecimal;
            @Index(name = "idx_productos_unidad", columnList = "id_unidad"),
            @Index(name = "idx_productos_categoria", columnList = "id_categoria")
        })
-public class Producto {
+public class Producto extends Auditable implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,7 +43,7 @@ public class Producto {
     @Column(name = "volumen_por_unidad_l", precision = 12, scale = 3)
     private BigDecimal volumenPorUnidadL;
 
-    // getters y setters
+    // --- Getters/Setters ---
     public Long getIdProducto() { return idProducto; }
     public void setIdProducto(Long idProducto) { this.idProducto = idProducto; }
 

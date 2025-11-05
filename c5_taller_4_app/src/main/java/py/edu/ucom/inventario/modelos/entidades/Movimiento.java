@@ -1,6 +1,7 @@
 package py.edu.ucom.inventario.modelos.entidades;
 
 import jakarta.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
@@ -10,7 +11,7 @@ import java.time.OffsetDateTime;
            @Index(name = "idx_mov_prod_fecha", columnList = "id_producto, fecha_movimiento DESC"),
            @Index(name = "idx_mov_tipo_fecha", columnList = "tipo, fecha_movimiento DESC")
        })
-public class Movimiento {
+public class Movimiento extends Auditable implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,7 +43,15 @@ public class Movimiento {
     @Column(name = "fecha_movimiento", nullable = false)
     private OffsetDateTime fechaMovimiento;
 
-    // getters y setters
+    // Default a ahora si viene null
+    @PrePersist
+    private void prePersist() {
+        if (fechaMovimiento == null) {
+            fechaMovimiento = OffsetDateTime.now();
+        }
+    }
+
+    // --- Getters/Setters ---
     public Long getIdMovimiento() { return idMovimiento; }
     public void setIdMovimiento(Long idMovimiento) { this.idMovimiento = idMovimiento; }
 
